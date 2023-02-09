@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace TechCompany.Data
 {
 
@@ -22,6 +23,10 @@ namespace TechCompany.Data
         [StringLength(50)]
         public string PostCode { get; set; }
 
+
+        [ForeignKey("UserId")]
+        public ICollection<UserCategory> UserCategory { get; set; }
+
     }
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -29,5 +34,14 @@ namespace TechCompany.Data
             : base(options)
         {
         }
+
+        public DbSet<Category> Category { get; set; }
+        public DbSet<CategoryItem> CategoryItem{ get; set; }
+        public DbSet<Content> Content { get; set; }
+        public DbSet<MediaType> MediaType { get; set; }
+        public DbSet<UserCategory> UserCategory { get; set; }
+
+
+
     }
 }
